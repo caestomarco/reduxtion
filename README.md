@@ -7,7 +7,7 @@ A modern and responsive web application that serves as a discussion forum, built
 - ### User Authentication
 
   Users can create accounts, log in, and manage their profiles securely.
-  
+
 - ### Topic Creation
 
   Users can create new topics for discussion and categorize them based on different subjects or interests.
