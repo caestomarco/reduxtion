@@ -128,7 +128,7 @@ function Navbar() {
                                     <div className="w-10 rounded-full">
                                         <img
                                             alt="User Avatar"
-                                            src="https://ui-avatars.com/api/?name=Caesto+Marco&background=random"
+                                            src={authedUser.avatar}
                                         />
                                     </div>
                                     {authedUser.name}

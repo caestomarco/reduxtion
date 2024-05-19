@@ -18,7 +18,7 @@ export const fetchLeaderboards = createAsyncThunk('leaderboards/fetchLeaderboard
         return response;
     } catch (error) {
         console.error(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }

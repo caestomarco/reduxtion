@@ -19,7 +19,7 @@ export const fetchAuthedUser = createAsyncThunk('user/fetchAuthedUser', async (_
         return response;
     } catch (error) {
         console.error(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -32,10 +32,12 @@ export const registerUser = createAsyncThunk('user/register', async ({ name, ema
         const loginResponse = await api.login({ email, password });
 
         api.putAccessToken(loginResponse.token);
+        alert(loginResponse.message);
+
         return { ...registerResponse, ...loginResponse };
     } catch (error) {
         alert(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -47,10 +49,12 @@ export const loginUser = createAsyncThunk('user/login', async ({ email, password
         const response = await api.login({ email, password });
 
         api.putAccessToken(response.token);
+        alert(response.message);
+
         return response;
     } catch (error) {
         alert(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -81,14 +85,13 @@ export const userSlice = createSlice({
             state.isLoading = false;
             state.isLoggedIn = false;
             state.isError = true;
+            state.authedUser = {};
         });
 
         builder.addMatcher(isAnyOf(fetchAuthedUser.pending, registerUser.pending, loginUser.pending), (state) => {
             state.isLoading = true;
         });
-        builder.addMatcher(isAnyOf(registerUser.fulfilled, loginUser.fulfilled), (state, action) => {
-            alert(action.payload.message);
-
+        builder.addMatcher(isAnyOf(registerUser.fulfilled, loginUser.fulfilled), (state) => {
             state.isLoading = false;
             state.isLoggedIn = true;
             state.isError = false;

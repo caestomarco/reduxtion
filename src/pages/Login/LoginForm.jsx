@@ -1,33 +1,24 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { useInput } from '../../hooks/useInput';
-
-import { loginUser } from '../../states/user/userSlice';
 
 import TextInput from '../../components/form/TextInput';
 import SubmitButton from '../../components/ui/SubmitButton';
 
 import { PasswordSVG, EmailSVG } from '../../components/ui/Icons';
 
-function LoginForm() {
-    const dispatch = useDispatch();
-
+function LoginForm({ handleLogin }) {
     const [showPassword, setShowPassword] = React.useState(false);
 
     const [email, handleEmail] = useInput('');
     const [password, handlePassword] = useInput('');
 
-    const handleLogin = (event) => {
-        event.preventDefault();
-        dispatch(loginUser({ email, password }));
-    };
-
     return (
         <form
+            aria-label="form"
             className="flex flex-col mb-0 space-y-4 rounded-lg p-6 lg:p-8"
-            onSubmit={(event) => handleLogin(event)}
+            onSubmit={(event) => handleLogin(event, { email, password })}
         >
             {/* EMAIL */}
             <div>

@@ -19,7 +19,7 @@ export const fetchThreadDetail = createAsyncThunk('thread/fetchThreadDetail', as
         return response;
     } catch (error) {
         console.error(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -33,7 +33,7 @@ export const upVoteThread = createAsyncThunk('thread/upVoteThread', async ({ thr
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -47,7 +47,7 @@ export const downVoteThread = createAsyncThunk('thread/downVoteThread', async ({
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -61,7 +61,7 @@ export const neutralizeThreadVote = createAsyncThunk('thread/neutralizeThreadVot
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -75,7 +75,7 @@ export const createComment = createAsyncThunk('thread/createComment', async ({ t
         return response;
     } catch (error) {
         console.error(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -89,7 +89,7 @@ export const upVoteComment = createAsyncThunk('thread/upVoteComment', async ({ c
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -103,7 +103,7 @@ export const downVoteComment = createAsyncThunk('thread/downVoteComment', async 
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -117,7 +117,7 @@ export const neutralizeCommentVote = createAsyncThunk('thread/neutralizeCommentV
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -134,12 +134,14 @@ export const threadSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchThreadDetail.fulfilled, (state, action) => {
             state.isLoading = false;
+            state.isError = false;
             state.threadDetail = action.payload;
         });
         builder.addCase(fetchThreadDetail.rejected, (state, action) => {
             console.error(action.type);
             state.isLoading = false;
             state.isError = true;
+            state.threadDetail = {};
         });
 
         builder.addCase(upVoteThread.pending, (state, action) => {

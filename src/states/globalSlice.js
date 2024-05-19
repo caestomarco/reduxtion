@@ -22,7 +22,7 @@ export const fetchUsersAndThreads = createAsyncThunk('users/fetchUsers', async (
         return { users, threads };
     } catch (error) {
         console.error(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -36,7 +36,7 @@ export const createThread = createAsyncThunk('thread/createThread', async ({ tit
         return response;
     } catch (error) {
         console.error(error);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -50,7 +50,7 @@ export const upVoteThread = createAsyncThunk('threads/upVoteThread', async ({ th
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -64,7 +64,7 @@ export const downVoteThread = createAsyncThunk('threads/downVoteThread', async (
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
@@ -78,7 +78,7 @@ export const neutralizeThreadVote = createAsyncThunk('threads/neutralizeThreadVo
         return response;
     } catch (error) {
         console.error(error, authedUserId);
-        throw error.response.data;
+        throw error;
     } finally {
         thunkAPI.dispatch(hideLoading());
     }
