@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { MAIN_PATHS } from '../../utils/paths';
 
@@ -15,7 +15,7 @@ import CategorySkeleton from './CategorySkeleton';
 import CategoryList from './CategoryList';
 import TextInput from '../../components/form/TextInput';
 import ThreadPagination from './ThreadPagination';
-import { InfoSVG, SearchSVG } from '../../components/ui/Icons';
+import { InfoSVG, SearchSVG, WriteSVG } from '../../components/ui/Icons';
 
 function HomePage() {
     // HOOKS
@@ -107,6 +107,7 @@ function HomePage() {
                     <LinkButton
                         id="new-thread-button"
                         destination={MAIN_PATHS.CREATE_THREAD}
+                        tooltip="Buat Diskusi Baru"
                         variant="glass"
                     >
                         Buat Diskusi Baru
@@ -131,6 +132,7 @@ function HomePage() {
             </aside>
             {/* MAIN CONTENT */}
             <section className="flex flex-col gap-y-4 p-4 w-full max-w-4xl">
+                <h2 className="text-3xl font-bold lg:hidden">Daftar Diskusi</h2>
                 {/* SEARCH BAR */}
                 <TextInput
                     id="search"
@@ -168,6 +170,26 @@ function HomePage() {
                     currentPage={currentPage}
                 />
             </section>
+            {/* FLOATIN' CREATE THREAD BUTTON */}
+            <div className="fixed bottom-6 right-6 lg:hidden">
+                <div className="group flex flex-col-reverse gap-2">
+                    <Link to={MAIN_PATHS.CREATE_THREAD}>
+                        <div
+                            className="lg:tooltip lg:tooltip-bottom w-full"
+                            data-tip="Buat Diskusi Baru"
+                        >
+                            <button
+                                id="new-thread-button-sm"
+                                type="button"
+                                className="btn glass btn-circle btn-outline font-bold btn-secondary "
+                            >
+                                <WriteSVG className="w-6 h-6 stroke-secondary" />
+                                <span className="sr-only">Create New Thread</span>
+                            </button>
+                        </div>
+                    </Link>
+                </div>
+            </div>
         </section>
     );
 }
