@@ -14,7 +14,7 @@ export const useInput = (defaultValue = null, maxLength = null) => {
                 alert(`${event.target.id} tidak boleh lebih dari ${maxLength} karakter.`);
             }
         } else {
-            // setValue(inputValue);
+            setValue(inputValue);
         }
     };
 
