@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import CategoryItem from './CategoryItem';
+import CategoryItem from './CategoryItem'
 
 function CategoryList({ categories, selectedCategory, onChange }) {
     return (
@@ -18,13 +18,13 @@ function CategoryList({ categories, selectedCategory, onChange }) {
                 />
             ))}
         </section>
-    );
+    )
 }
 
 CategoryList.propTypes = {
     categories: PropTypes.arrayOf(PropTypes.string).isRequired,
     selectedCategory: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-};
+}
 
-export default CategoryList;
+export default CategoryList
