@@ -117,7 +117,7 @@ export const downVoteComment = createAsyncThunk('thread/downVoteComment', async 
 
 export const neutralizeCommentVote = createAsyncThunk('thread/neutralizeCommentVote', async ({ commentId, threadId, authedUserId }, thunkAPI) => {
     thunkAPI.dispatch(showLoading());
-    
+
     try {
         const response = await api.neutralizeCommentVote({ commentId, threadId });
 
